@@ -197,7 +197,7 @@ def rec(state, recu):
     modstate = state.copy()
     recu += 1
     modstate2 = swperson(modstate)
-    if recu > 600:
+    if recu > 200:
         return None
 
     ret = go(modstate)
@@ -212,9 +212,17 @@ def rec(state, recu):
     if myarr.count(graphstr) == 0:
         myarr.append(graphstr)
         rec(modstate, recu)
+        rec(modstate, recu)
+        rec(modstate, recu)
+        rec(modstate, recu)
+        rec(modstate, recu)
     if myarr.count(graphstr2) == 0:
         myarr.append(graphstr2)
-    rec(modstate2, recu)
+        rec(modstate2, recu)
+        rec(modstate2, recu)
+        rec(modstate2, recu)
+        rec(modstate2, recu)
+        rec(modstate2, recu)
     return None
 
 
