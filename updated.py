@@ -197,7 +197,8 @@ def rec(state, recu):
     modstate = state.copy()
     recu += 1
     modstate2 = swperson(modstate)
-    if recu > 200:
+    graphstralt = getstate(modstate) + "->" + getstate(modstate2) + ";"
+    if recu > 20:
         return None
 
     ret = go(modstate)
@@ -223,8 +224,13 @@ def rec(state, recu):
         rec(modstate2, recu)
         rec(modstate2, recu)
         rec(modstate2, recu)
-    return None
 
+    if myarr.count(graphstralt) == 0:
+        myarr.append(graphstralt)
+    rec(modstate, recu)
+    rec(modstate2, recu)
+
+    return None
 
 
 sys.setrecursionlimit(150000)
