@@ -8,13 +8,24 @@ statedict = {}
 
 myarr = []
 
+alicelock = 0
+
+boblock = 0
 
 def swperson(state):
     a = state.get('player')
-    if (a == 'alice'):
+    if (alicelock == 0) and (boblock == 0):
+        if (a == 'alice'):
+            state['player'] = 'bob'
+        if (a == 'bob'):
+            state['player'] = 'alice'
+    if (alicelock == 1):
         state['player'] = 'bob'
     else:
-        state['player'] = 'alice'
+        if (boblock == 1):
+            state['player'] = 'alice'
+        else:
+            state['player'] = 'win'
     return state
 
 
@@ -34,6 +45,8 @@ def go(state):
         count = ""
 
     if (croom == 'red room'):
+        if (state['player'] == 'alice'):
+            alicelock = 1
         if (r == croom) and count.find("r") == -1:
             state[a + '_room'] = 'west room'
             state['red_key'] = 'west room'
@@ -160,6 +173,8 @@ def go(state):
             return [state, str]
 
     if (croom == 'blue room'):
+        if (state['player'] == 'bob'):
+            boblock = 1
         if (b == croom) and count.find("b") == -1:
             state[a + '_room'] = 'east room'
             state['blue_key'] = 'east room'
