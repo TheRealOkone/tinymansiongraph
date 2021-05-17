@@ -388,6 +388,9 @@ def rec(state, recu):
     ret = go(modstate)
     ret2 = go(modstate2)
     if (ret == None) and (ret2 == None):
+        graphstrwin = getstate(state) + ' [style="filled",fillcolor="red"];'
+        if myarr.count(graphstrwin) == 0:
+            myarr.append(graphstrwin)
         return None
     if state.get('player') == "win":
         graphstrwin = getstate(state) + ' [style="filled",fillcolor="green"];'
@@ -466,6 +469,11 @@ def rec(state, recu):
 def out(myarr):
     for i in myarr:
         print(i)
+def checklose(statedict):
+    for k,v in statedict.items():
+        if v == "":
+            print(k + ' [style="filled",fillcolor="red"];')
+
 
 sys.setrecursionlimit(150000)
 random.seed()
@@ -475,3 +483,5 @@ print(len(myarr))
 print(statedict)
 print(len(statedict))
 out(myarr)
+# checklose(statedict)
+
